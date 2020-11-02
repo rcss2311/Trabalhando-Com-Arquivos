@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 public class Program {
 	public static void main(String[] args) {
-		File file = new File("C:\\temp\\in.txt");
+		File file = new File("C:\\WS-Eclipse\\in.txt");
 		Scanner sc = null;
 		try {
 			sc = new Scanner(file);
