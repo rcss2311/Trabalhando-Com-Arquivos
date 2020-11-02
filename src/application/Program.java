@@ -1,20 +1,32 @@
 package application;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.File;
+import java.util.Scanner;
 
 public class Program {
 	public static void main(String[] args) {
-		String[] lines = new String[] { "Good morning", "Good afternoon", "Good night" };
-		String path = "C:\\WS-Eclipse\\out.txt";
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path,true))) {
-			for (String line : lines) {
-				bw.write(line);
-				bw.newLine();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter a folder path: ");
+		String strPath = sc.nextLine();
+		
+		File path = new File(strPath);
+		
+		File[] folders = path.listFiles(File::isDirectory); // criaa um vetor com a lista de todas as pastas
+															//isDirectory pega o caminho de cada pasta e coloca dentro do vetor' 
+		System.out.println("FOLDERS:");
+		
+		for (File folder : folders) {
+			System.out.println(folder);
+		}//até aqui, imprime uma lista de pastas contidas no caminho
+		
+		File[] files = path.listFiles(File::isFile);//imprime apenas arquivos com o metodo isFile
+		System.out.println("FILES:");
+		for (File file : files) {
+			System.out.println(file);
 		}
+		boolean success = new File(strPath + "\\subdir").mkdir();//cria uma sub pasta a partir do strPath 
+		System.out.println("Directory created successfully: " + success);
+		sc.close();
 	}
 }
